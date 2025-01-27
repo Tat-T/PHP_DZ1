@@ -42,17 +42,17 @@
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3">
                 <form method="post">
-                    <div class="form-group">
-                        <label for="r">R:</label>
-                        <input type="text" class="form-control" id="r" name="r" value="<?= htmlspecialchars($r) ?>">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="r" class="me-3 mb-3">R:</label>
+                        <input type="text" class="form-control mb-3" id="r" name="r" value="<?= htmlspecialchars($r) ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="g">G:</label>
-                        <input type="text" class="form-control" id="g" name="g" value="<?= htmlspecialchars($g) ?>">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="g" class="me-3 mb-3">G:</label>
+                        <input type="text" class="form-control mb-3" id="g" name="g" value="<?= htmlspecialchars($g) ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="b">B:</label>
-                        <input type="text" class="form-control" id="b" name="b" value="<?= htmlspecialchars($b) ?>">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="b" class="me-3 mb-3">B:</label>
+                        <input type="text" class="form-control mb-3" id="b" name="b" value="<?= htmlspecialchars($b) ?>">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="form-control btn btn-primary mt-3 p-3 text-center">Accept</button>
