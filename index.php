@@ -1,3 +1,38 @@
+<?php
+        if (isset($_GET['month'])) {
+            $month = (int)$_GET['month'];
+            $year = date('Y');
+
+            if ($month < 1 || $month > 12) {
+                echo "<p style='color: red;'>Ошибка: введите номер месяца от 1 до 12.</p>";
+                return;
+            }
+
+            $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+            $firstDayOfMonth = date('N', strtotime("$year-$month-01"));
+
+            ob_start(); // Начинаем буферизацию вывода
+            echo "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; text-align: center;'>";
+            echo "<tr><th colspan='7' style='background-color: #f2f2f2;'>" . date('F Y', strtotime("$year-$month-01")) . "</th></tr>";
+            echo "<tr style='background-color: #ddd;'><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th style='color: red;'>Сб</th><th style='color: red;'>Вс</th></tr>";
+            echo "<tr>";
+
+            for ($i = 1; $i < $firstDayOfMonth; $i++) {
+                echo "<td></td>";
+            }
+
+            for ($day = 1; $day <= $daysInMonth; $day++) {
+                $currentDay = date('N', strtotime("$year-$month-$day"));
+                $color = ($currentDay >= 6) ? " style='color: red;'" : "";
+                echo "<td$color>$day</td>";
+                if ($currentDay == 7) echo "</tr><tr>";
+            }
+
+            echo "</tr></table>";
+            echo ob_get_clean(); // Отправляем только HTML-код календаря
+            exit;
+        }
+        ?>
 <section>
     <div class="container">
         <div class="row mt-3 bg-light border rounded p-3">
@@ -70,5 +105,36 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="container">
+        <div class="row mt-3 bg-light border rounded p-3">
+            <h5 class="text-primary">Задание 2</h5>
+            <p>
+                Создать функцию, которая принимает в качестве параметра
+                целочисленное значение month в интервале от 1 до 12. Это
+                значение интерпретируется как номер месяца текущего года. При
+                вызове функция должна вывести на странице в виде таблицы
+                календарь одного месяца текущего года, соответствующего переданному значению month.
+                Формат календаря продумать самостоятельно. Предусмотреть
+                реакцию функции на неправильные значения month. Для оформления
+                использовать CSS, выделять цветом выходные дни и т.п.
+            </p>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 offset-md-3">
+                <h5 class="text-center">Выберите месяц:</h5>
+                <select id="month" class="form-control mb-3" onchange="loadCalendar()">
+                    <?php for ($m = 1; $m <= 12; $m++): ?>
+                        <option value="<?= $m ?>"><?= date('F', strtotime("2024-$m-01")) ?></option>
+                    <?php endfor; ?>
+                </select>
+                <div class="col-md-6 offset-md-3 d-flex justify-content-center">
+                    <div id="calendar" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <?php
 include "footer.php";
+?>
