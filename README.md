@@ -26,3 +26,4 @@
 http://sites/PHP_DZ1/index.php
 
 <img src="images/Screenshot_8.png" alt="Окно приложения" width="350">
+<img src="images/Screenshot_9.png" alt="Окно приложения" width="350">
